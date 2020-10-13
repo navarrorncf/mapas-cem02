@@ -1,0 +1,48 @@
+.sub {
+  width: 4em;
+  text-align: center;
+}
+
+.NUM {
+  width: 3em;
+  text-align: center;
+}
+
+.NOME {
+  width: 20em;
+  text-align: left;
+}
+
+.NUM,
+.NOME,
+.sub {
+  padding: 9px 0 9px 0;
+}
+
+.ss {
+  background-color: rgb(181, 204, 255);
+}
+
+.ms {
+  background-color: rgb(143, 246, 174);
+}
+
+.mm {
+  background-color: rgb(197, 251, 224);
+}
+
+.mi {
+  background-color: rgb(250, 198, 138);
+}
+
+.ii {
+  background-color: rgb(243, 172, 172);
+}
+
+.ss,
+.ms,
+.mm,
+.mi,
+.ii {
+  border-right: solid 1px #3333;
+}
