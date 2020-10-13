@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/mapas-cem02/static/css/main.ea09f66e.chunk.css",
+    "main.js": "/mapas-cem02/static/js/main.737a9a8a.chunk.js",
+    "main.js.map": "/mapas-cem02/static/js/main.737a9a8a.chunk.js.map",
+    "runtime-main.js": "/mapas-cem02/static/js/runtime-main.1848c22f.js",
+    "runtime-main.js.map": "/mapas-cem02/static/js/runtime-main.1848c22f.js.map",
+    "static/js/2.97d9b4bf.chunk.js": "/mapas-cem02/static/js/2.97d9b4bf.chunk.js",
+    "static/js/2.97d9b4bf.chunk.js.map": "/mapas-cem02/static/js/2.97d9b4bf.chunk.js.map",
+    "index.html": "/mapas-cem02/index.html",
+    "precache-manifest.fa4800837769e44526b697b30cc7e5ca.js": "/mapas-cem02/precache-manifest.fa4800837769e44526b697b30cc7e5ca.js",
+    "service-worker.js": "/mapas-cem02/service-worker.js",
+    "static/css/main.ea09f66e.chunk.css.map": "/mapas-cem02/static/css/main.ea09f66e.chunk.css.map",
+    "static/js/2.97d9b4bf.chunk.js.LICENSE.txt": "/mapas-cem02/static/js/2.97d9b4bf.chunk.js.LICENSE.txt",
+    "static/media/index.css": "/mapas-cem02/static/media/Lato-Regular.2d36b1a9.ttf"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.1848c22f.js",
+    "static/js/2.97d9b4bf.chunk.js",
+    "static/css/main.ea09f66e.chunk.css",
+    "static/js/main.737a9a8a.chunk.js"
+  ]
+}
