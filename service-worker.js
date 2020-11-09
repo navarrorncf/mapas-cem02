@@ -14,7 +14,7 @@
 importScripts("https://storage.googleapis.com/workbox-cdn/releases/4.3.1/workbox-sw.js");
 
 importScripts(
-  "/mapas-cem02/precache-manifest.5231e75ef6c4972d1a54bd598886e99a.js"
+  "/mapas-cem02/precache-manifest.fd29a3086d9c6edc44e398ac9b1afb3e.js"
 );
 
 self.addEventListener('message', (event) => {
