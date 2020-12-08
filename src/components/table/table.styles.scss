@@ -7,8 +7,24 @@
   width: 4em;
 }
 
-.NUM {
-  width: 3em;
+@media (max-width: 1400px) {
+  .table-container {
+    font-size: 1.6em;
+  }
+
+  .sub {
+    width: 3.5em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .table-container {
+    font-size: 1.5em;
+  }
+
+  .sub {
+    width: 3.3em;
+  }
 }
 
 .NOME {

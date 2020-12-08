@@ -3,6 +3,18 @@
   text-align: center;
 }
 
+@media (max-width: 1400px) {
+  .sub {
+    width: 3.5em;
+  }
+}
+
+@media (max-width: 1200px) {
+  .sub {
+    width: 3.3em;
+  }
+}
+
 .NUM {
   width: 3em;
   text-align: center;
