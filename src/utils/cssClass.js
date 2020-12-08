@@ -7,7 +7,7 @@ const cssClass = (key, value, student) => {
 
   let avg = (value * 1 || 0) / bim;
 
-  if (avg < 3) {
+  if (avg < 3 || isNaN(avg)) {
     return "ii";
   } else if (avg < 4.75) {
     return "mi";
