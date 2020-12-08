@@ -3,7 +3,7 @@ import { Provider } from "react-redux";
 import store from "./redux/store";
 
 import Options from "./components/options/options.component";
-// import Table from "./components/table/table.component";
+import Table from "./components/table/table.component";
 import "./App.css";
 
 const App = () => {
@@ -11,7 +11,7 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <Options />
-        {/* <Table /> */}
+        <Table />
       </div>
     </Provider>
   );

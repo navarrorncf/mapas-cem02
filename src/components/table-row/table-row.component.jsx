@@ -2,8 +2,11 @@ import React from "react";
 
 import "./table-row.styles.scss";
 
-import calcCssClass from "../../utils/calcCssClass";
+import cssClass from "../../utils/cssClass";
 import shortenString from "../../utils/shortenString";
+import getAttendance from "../../utils/getAttendance";
+import getGradesTotal from "../../utils/getGradesTotal";
+import getFailedSubjects from "../../utils/getFailedSubjects";
 
 const recCssClass = (rec) =>
   rec === 0
@@ -16,35 +19,42 @@ const recCssClass = (rec) =>
     ? "mi"
     : "ii";
 
-const TableRow = ({ student, bimester, headers, failedSubjects }) => (
-  <tr>
-    {headers
-      .map((el) =>
-        el !== "F" ? (
-          <td
-            className={`${
-              ["NUM", "NOME"].includes(el) ? el : "sub"
-            } ${calcCssClass(el, student[el], bimester, 2)}`}
-            key={`sd-${student.NUM}-${el}`}
-          >
-            {el === "NOME"
-              ? shortenString(student[el], 30)
-              : el !== "NUM"
-              ? student[el].toFixed(2)
-              : student[el]}
-          </td>
-        ) : (
-          ""
+const TableRow = ({ student, headers, bimester, failedSubjects }) => {
+  const studentObject = Object.assign(
+    { NAME: student.name, F: getAttendance(student) },
+    getGradesTotal(student)
+  );
+
+  return (
+    <tr>
+      {headers
+        .map((el) =>
+          el !== "F" && !/(PD1|PD3)/.test(el) ? (
+            <td
+              className={`${el === "NOME" ? el : "sub"} ${cssClass(
+                el,
+                studentObject[el],
+                student
+              )}`}
+              key={`sd-${student.code}-${el}`}
+            >
+              {el === "NOME"
+                ? shortenString(student["name"], 30)
+                : studentObject[el].toFixed(2)}
+            </td>
+          ) : (
+            "" // TODO: Exchange "" for attendance with css classes
+          )
         )
-      )
-      .filter((el) => el !== "")}
-    <td
-      className={`sub ${recCssClass(failedSubjects)}`}
-      key={`sd-${student.NUM}-REC`}
-    >
-      {failedSubjects}
-    </td>
-  </tr>
-);
+        .filter((el) => el !== "")}
+      <td
+        className={`sub ${recCssClass(getFailedSubjects(student))}`}
+        key={`sd-${student.code}-REC`}
+      >
+        {getFailedSubjects(student)}
+      </td>
+    </tr>
+  );
+};
 
 export default TableRow;
