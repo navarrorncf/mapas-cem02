@@ -1,0 +1,193 @@
+.report-card-container {
+  height: 100vh;
+  width: 100vw;
+  position: fixed;
+  top: 0;
+  left: 0;
+  background: #000b;
+  backdrop-filter: blur(3px);
+  z-index: 10;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: visibility 0.3s, opacity 0.3s, z-index 0 0.4s;
+  transition-delay: 0.15s;
+}
+
+.report-card {
+  height: 90vh;
+  width: 85vw;
+  background-color: #ffffffee;
+  border-radius: 5px;
+  box-shadow: 0 0 15px 3px #000a;
+  transition: all 0.3s;
+}
+
+.close-button {
+  position: relative;
+  height: 3.5rem;
+  width: 3.5rem;
+  top: 1rem;
+  left: calc(100% - 4.7rem);
+  font-size: 3rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: auto 0.5rem;
+  border-radius: 50%;
+  border: solid 2px #777;
+  color: #777;
+  transition: all 0.4s;
+  user-select: none;
+}
+
+.close-button:hover {
+  cursor: pointer;
+  color: #c33;
+  border-color: #c33;
+  transform: translateY(-1px);
+  box-shadow: 0 0 4px 1px #0004;
+}
+
+.close-button:active {
+  color: #a32929;
+  border-color: #a32929;
+  transform: translateY(1px);
+  box-shadow: 0 0 1px 1px #0005;
+}
+
+.report-card-container.closed {
+  opacity: 0;
+  visibility: 0;
+  z-index: -10;
+}
+
+.closed .report-card {
+  transform: scale(0.2);
+  opacity: 0;
+  visibility: 0;
+}
+
+.chevron-right,
+.chevron-left {
+  top: calc(50% - 6rem);
+  color: #888;
+  font-size: 6rem;
+  position: fixed;
+  padding: 2rem;
+  border-radius: 50%;
+  transition: all 0.3s;
+  user-select: none;
+}
+
+.chevron-right:hover,
+.chevron-left:hover {
+  color: #aaa;
+  cursor: pointer;
+  transform: translateY(-1px);
+}
+
+.chevron-right:active,
+.chevron-left:active {
+  transform: translateY(1px);
+}
+
+.chevron-right {
+  right: 1rem;
+}
+
+.chevron-left {
+  left: 1rem;
+}
+
+.report-card--data {
+  /* background: #5698ce88; */
+  height: 95%;
+  margin-top: -4rem;
+
+  & .heading {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  & .heading h3 {
+    font-size: 1.7rem;
+    width: 50%;
+    line-height: 0.9;
+    font-weight: 400;
+    text-align: center;
+    padding: 1.5rem 0;
+    border-bottom: solid 1px #ccc;
+  }
+
+  & .heading .image-container {
+    height: 90px;
+    padding: 0.5rem 4rem 0.5rem 4rem;
+
+    & img {
+      height: 100%;
+    }
+  }
+
+  & .student-data {
+    font-size: 1.8rem;
+    display: flex;
+    flex-direction: column;
+    height: 60px;
+    justify-content: center;
+    align-items: center;
+    justify-items: center;
+    text-align: center;
+    flex-wrap: wrap;
+    line-height: 1;
+
+    & p {
+      padding: 0.5rem 1rem;
+      font-weight: 400;
+      margin: 0;
+      width: 30%;
+    }
+  }
+
+  & .grades-data {
+    font-size: 1.7rem;
+    margin-top: 2rem;
+
+    & table {
+      border: solid 1px #444;
+      border-collapse: collapse;
+      width: 1000px;
+      margin: 1rem auto 0 auto;
+      font-weight: 400;
+
+      & .disciplinas {
+        width: 200px;
+      }
+
+      & th,
+      & tr td {
+        border: solid 1px #444;
+      }
+
+      & .coluna {
+        width: 7.5%;
+        text-align: center;
+      }
+
+      tbody {
+        font-size: 1.6rem;
+      }
+
+      & tfoot {
+        border: solid 1px #444;
+
+        & th {
+          width: 1000px;
+          border: none;
+          font-weight: 400;
+        }
+      }
+    }
+  }
+}

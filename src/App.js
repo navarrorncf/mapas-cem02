@@ -4,6 +4,7 @@ import store from "./redux/store";
 
 import Options from "./components/options/options.component";
 import Table from "./components/table/table.component";
+import ReportCard from './components/report-card/report-cart.component';
 import "./App.css";
 
 const App = () => {
@@ -11,6 +12,7 @@ const App = () => {
     <Provider store={store}>
       <div className="App">
         <Options />
+        <ReportCard />
         <Table />
       </div>
     </Provider>
