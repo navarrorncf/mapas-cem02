@@ -1,24 +1,12 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setBimester,
-  setGroup,
-  setGrade,
-} from "../../redux/options/optionActions";
+import { setGroup, setGrade } from "../../redux/options/optionActions";
 
-import {
-  allBimesters,
-  allGrades,
-  groupsByGrade,
-} from "../../redux/options/initialState";
+import { allGrades, groupsByGrade } from "../../redux/options/initialState";
 
 import "./options.styles.scss";
 
 const Options = () => {
-  let [bimester, changeBimester] = useState(
-    useSelector((state) => state.options.bimester)
-  );
-
   let [group, changeGroup] = useState(
     useSelector((state) => state.options.group)
   );
@@ -28,11 +16,6 @@ const Options = () => {
   );
 
   const dispatch = useDispatch();
-
-  const handleChangeBimester = (e) => {
-    changeBimester(e.target.value);
-    dispatch(setBimester(e.target.value));
-  };
 
   const handleChangeGroup = (e) => {
     changeGroup(e.target.value);
@@ -76,21 +59,6 @@ const Options = () => {
                 key={`group-${groupName.split(" ")[0]}`}
               >
                 {groupName}
-              </option>
-            ))}
-          </select>
-        </div>
-
-        <div className="option">
-          <label htmlFor="bimester">Bimestre: </label>
-          <select
-            name="bimester"
-            value={bimester}
-            onChange={handleChangeBimester}
-          >
-            {allBimesters.map((bim) => (
-              <option value={bim} key={`bim-${bim}`}>
-                {bim}º
               </option>
             ))}
           </select>

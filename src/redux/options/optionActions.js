@@ -9,8 +9,3 @@ export const setGrade = (grade) => ({
   type: actionTypes.SET_GRADE,
   payload: grade,
 });
-
-export const setBimester = (bimester) => ({
-  type: actionTypes.SET_BIMESTER,
-  payload: bimester,
-});

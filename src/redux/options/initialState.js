@@ -1,10 +1,11 @@
-import data from "../../dev-data/output.json";
-import parseData from "../../utils/parseData";
+import reportCards from "../../dev-data/reportCards.json";
+import studentSets from "../../dev-data/studentSets.json";
 
-export const {
-  allBimesters,
-  allGroups,
-  allGrades,
-  firstGroup,
-  groupsByGrade,
-} = parseData(data);
+const allGrades = Object.keys(studentSets);
+allGrades.sort();
+
+const groupsByGrade = studentSets;
+
+const firstGroup = groupsByGrade["1"][0];
+
+export { allGrades, groupsByGrade, firstGroup, reportCards };
