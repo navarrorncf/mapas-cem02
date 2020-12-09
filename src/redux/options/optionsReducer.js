@@ -2,14 +2,14 @@ import actionTypes from "./optionActionTypes";
 import {
   allGrades,
   firstGroup,
-  currentStudentName,
+  currentStudentIndex,
   reportCardOpen,
 } from "./initialState";
 
 const initialState = {
   grade: allGrades[0],
   group: firstGroup,
-  currentStudentName,
+  currentStudentIndex,
   reportCardOpen,
 };
 
@@ -25,10 +25,10 @@ const optionsReducer = (state = initialState, { type, payload }) => {
         ...state,
         group: payload,
       };
-    case actionTypes.SET_CURRENT_STUDENT_NAME:
+    case actionTypes.SET_CURRENT_STUDENT_INDEX:
       return {
         ...state,
-        currentStudentName: payload,
+        currentStudentIndex: payload,
       };
     case actionTypes.SET_REPORT_CARD_OPEN:
       return {

@@ -8,15 +8,15 @@ const groupsByGrade = studentSets;
 
 const firstGroup = groupsByGrade["1"][0];
 
-const currentStudentName = "";
-
 const reportCardOpen = false;
+
+const currentStudentIndex = 0;
 
 export {
   allGrades,
   groupsByGrade,
   firstGroup,
   reportCards,
-  currentStudentName,
+  currentStudentIndex,
   reportCardOpen,
 };

@@ -10,9 +10,9 @@ export const setGrade = (grade) => ({
   payload: grade,
 });
 
-export const setCurrentStudentName = (name) => ({
-  type: actionTypes.SET_CURRENT_STUDENT_NAME,
-  payload: name,
+export const setCurrentStudentIndex = (index) => ({
+  type: actionTypes.SET_CURRENT_STUDENT_INDEX,
+  payload: index,
 });
 
 export const setReportCardOpen = (open) => ({
