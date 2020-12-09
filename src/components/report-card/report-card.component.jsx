@@ -570,7 +570,7 @@ const ReportCard = () => {
                     {student.grades[subByBlock[blocks[0]][3]][3] || "-"}
                   </td>
                   <td className="disciplinas">
-                    {lengthen[subByBlock[blocks[1]][2]]}
+                    {lengthen[subByBlock[blocks[1]][3]]}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
