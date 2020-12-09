@@ -1,4 +1,9 @@
 import React from "react";
+import { useDispatch } from "react-redux";
+import {
+  setCurrentStudentName,
+  setReportCardOpen,
+} from "../../redux/options/optionActions";
 
 import "./table-row.styles.scss";
 
@@ -19,11 +24,21 @@ const recCssClass = (rec) =>
     ? "mi"
     : "ii";
 
-const TableRow = ({ student, headers, bimester, failedSubjects }) => {
+const TableRow = ({ student, headers }) => {
   const studentObject = Object.assign(
     { NAME: student.name, F: getAttendance(student) },
     getGradesTotal(student)
   );
+
+  const dispatch = useDispatch();
+
+  const handleClick = (e) => {
+    const target = e.target.parentNode;
+    const name = target.children[0].innerText;
+
+    dispatch(setCurrentStudentName(name));
+    dispatch(setReportCardOpen(true));
+  };
 
   return (
     <tr>
@@ -31,6 +46,7 @@ const TableRow = ({ student, headers, bimester, failedSubjects }) => {
         .map((el) =>
           el !== "F" && !/(PD1|PD3)/.test(el) ? (
             <td
+              onClick={handleClick}
               className={`${el === "NOME" ? el : "sub"} ${cssClass(
                 el,
                 studentObject[el],
