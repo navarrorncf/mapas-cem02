@@ -1,8 +1,8 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setReportCardOpen,
-  setCurrentStudentName,
+  setCurrentStudentIndex,
 } from "../../redux/options/optionActions";
 
 import reportCards from "../../dev-data/reportCards.json";
@@ -20,15 +20,21 @@ import "./report-card.styles.scss";
 const ReportCard = () => {
   const dispatch = useDispatch();
 
-  const { group, currentStudentName, reportCardOpen } = useSelector(
+  const { group, reportCardOpen, currentStudentIndex } = useSelector(
     (state) => state.options
+  );
+
+  const [index, setIndex] = useState(
+    useSelector((state) => state.options.currentStudentIndex)
+  );
+
+  const [open, setOpen] = useState(
+    useSelector((state) => state.options.reportCardOpen)
   );
 
   const currentMap = reportCards.filter(
     (reportCard) => reportCard.group === group
   );
-
-  const allNames = currentMap.map((student) => student.name);
 
   const blocks = currentMap[0].block;
   const maxIndex = currentMap.length - 1;
@@ -38,10 +44,7 @@ const ReportCard = () => {
     2: ["ART", "ESP", "FIS", "GEO", "SOC", "PD2"],
   };
 
-  let student =
-    currentMap.find((student) =>
-      new RegExp(currentStudentName).test(student.name)
-    ) || currentMap[0];
+  let student = currentMap[currentStudentIndex];
   let failedSubjects = getFailedSubjects(student);
 
   const handleClose = (e) => {
@@ -49,42 +52,43 @@ const ReportCard = () => {
   };
 
   const handleChevron = (operation) => {
-    const index = allNames.findIndex((name) =>
-      new RegExp(currentStudentName).test(name)
-    );
-
     if (operation === "+" && index < maxIndex) {
-      const nextName = currentMap[index + 1].name;
-      dispatch(setCurrentStudentName(nextName));
+      setIndex(index + 1);
+      dispatch(setCurrentStudentIndex(index));
     } else if (operation === "-" && index > 0) {
-      const previousName = currentMap[index + 1].name;
-      dispatch(setCurrentStudentName(previousName));
+      setIndex(index - 1);
+      dispatch(setCurrentStudentIndex(index));
     }
 
     failedSubjects = getFailedSubjects(student);
   };
 
-  /* document.addEventListener("keydown", (e) => {
-    e.preventDefault();
-    const index = allNames.findIndex((name) =>
-      new RegExp(currentStudentName).test(name)
-    );
+  const handleKeyUp = (e) => {
+    console.log(e.key, index, maxIndex, open);
 
-    if (e.key === "ArrowRight" && reportCardOpen && index < maxIndex) {
-      const nextName = currentMap[index + 1].name;
-      dispatch(setCurrentStudentName(nextName));
-    } else if (e.key === "ArrowLeft" && reportCardOpen && index > 0) {
-      const previousName = currentMap[index + 1].name;
-      dispatch(setCurrentStudentName(previousName));
-    } else if (e.key === "Escape" && reportCardOpen) {
-      dispatch(setReportCardOpen(false));
+    if (e.key === "ArrowRight") {
+      handleChevron("+");
+    } else if (e.key === "ArrowLeft") {
+      handleChevron("-");
+    } else if (e.key === "Escape") {
+      setOpen(false);
+      dispatch(setReportCardOpen(open));
     }
-  }); */
+  };
+
+  useEffect(() => {
+    window.addEventListener("keyup", handleKeyUp, false);
+
+    return () => {
+      window.removeEventListener("keyup", handleKeyUp);
+    };
+  });
 
   return (
     <div
       className={`report-card-container ${reportCardOpen ? "" : "closed"}`}
       id="report-card-container"
+      onKeyUp={handleKeyUp}
     >
       <div className="report-card">
         <div className="close-button" onClick={handleClose}>

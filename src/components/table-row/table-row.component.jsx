@@ -1,7 +1,7 @@
 import React from "react";
 import { useDispatch } from "react-redux";
 import {
-  setCurrentStudentName,
+  setCurrentStudentIndex,
   setReportCardOpen,
 } from "../../redux/options/optionActions";
 
@@ -36,7 +36,14 @@ const TableRow = ({ student, headers }) => {
     const target = e.target.parentNode;
     const name = target.children[0].innerText;
 
-    dispatch(setCurrentStudentName(name));
+    const rowsArray = Array.from(document.querySelectorAll("tbody tr"))
+      .map((row) => row.children[0])
+      .filter((row) => row.classList.contains("NOME"))
+      .map((row) => row.innerText);
+
+    const index = rowsArray.findIndex((el) => name === el);
+
+    dispatch(setCurrentStudentIndex(index));
     dispatch(setReportCardOpen(true));
   };
 
