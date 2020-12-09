@@ -1,10 +1,16 @@
 import actionTypes from "./optionActionTypes";
-import { allGrades, firstGroup /* reportCards */ } from "./initialState";
+import {
+  allGrades,
+  firstGroup,
+  currentStudentName,
+  reportCardOpen,
+} from "./initialState";
 
 const initialState = {
   grade: allGrades[0],
   group: firstGroup,
-  // currentMap: reportCards.filter((student) => student.group === firstGroup),
+  currentStudentName,
+  reportCardOpen,
 };
 
 const optionsReducer = (state = initialState, { type, payload }) => {
@@ -18,6 +24,16 @@ const optionsReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         group: payload,
+      };
+    case actionTypes.SET_CURRENT_STUDENT_NAME:
+      return {
+        ...state,
+        currentStudentName: payload,
+      };
+    case actionTypes.SET_REPORT_CARD_OPEN:
+      return {
+        ...state,
+        reportCardOpen: payload,
       };
     default:
       return state;
