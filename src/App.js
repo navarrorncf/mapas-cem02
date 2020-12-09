@@ -4,7 +4,7 @@ import store from "./redux/store";
 
 import Options from "./components/options/options.component";
 import Table from "./components/table/table.component";
-import ReportCard from './components/report-card/report-cart.component';
+import ReportCard from "./components/report-card/report-cart.component";
 import "./App.css";
 
 const App = () => {
