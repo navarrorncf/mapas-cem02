@@ -1,5 +1,9 @@
-import React, { useState, Fragment } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  setReportCardOpen,
+  setCurrentStudentName,
+} from "../../redux/options/optionActions";
 
 import reportCards from "../../dev-data/reportCards.json";
 import { lengthen } from "../../utils/abbreviations";
@@ -14,11 +18,17 @@ import logo from "../../assets/images/logo128.png";
 import "./report-card.styles.scss";
 
 const ReportCard = () => {
-  const { group } = useSelector((state) => state.options);
+  const dispatch = useDispatch();
+
+  const { group, currentStudentName, reportCardOpen } = useSelector(
+    (state) => state.options
+  );
 
   const currentMap = reportCards.filter(
     (reportCard) => reportCard.group === group
   );
+
+  const allNames = currentMap.map((student) => student.name);
 
   const blocks = currentMap[0].block;
   const maxIndex = currentMap.length - 1;
@@ -28,42 +38,56 @@ const ReportCard = () => {
     2: ["ART", "ESP", "FIS", "GEO", "SOC", "PD2"],
   };
 
-  const [index, setIndex] = useState(0);
-  let student = currentMap[index] || currentMap[0];
+  let student =
+    currentMap.find((student) =>
+      new RegExp(currentStudentName).test(student.name)
+    ) || currentMap[0];
   let failedSubjects = getFailedSubjects(student);
 
-  const handleClick = (e) => {
-    const reportContainer = document.querySelector("#report-card-container");
-
-    document.addEventListener("keyup", handleEsc, false);
-    reportContainer.classList.add("closed");
+  const handleClose = (e) => {
+    dispatch(setReportCardOpen(false));
   };
 
   const handleChevron = (operation) => {
+    const index = allNames.findIndex((name) =>
+      new RegExp(currentStudentName).test(name)
+    );
+
     if (operation === "+" && index < maxIndex) {
-      setIndex(index + 1);
+      const nextName = currentMap[index + 1].name;
+      dispatch(setCurrentStudentName(nextName));
     } else if (operation === "-" && index > 0) {
-      setIndex(index - 1);
+      const previousName = currentMap[index + 1].name;
+      dispatch(setCurrentStudentName(previousName));
     }
 
-    student = currentMap[index];
     failedSubjects = getFailedSubjects(student);
   };
 
-  const handleEsc = (e) => {
-    if (e.keyCode !== 27) {
-      return;
-    }
+  /* document.addEventListener("keydown", (e) => {
+    e.preventDefault();
+    const index = allNames.findIndex((name) =>
+      new RegExp(currentStudentName).test(name)
+    );
 
-    const reportContainer = document.querySelector("#report-card-container");
-    reportContainer.classList.remove("closed");
-    document.removeEventListener("keyup", handleEsc);
-  };
+    if (e.key === "ArrowRight" && reportCardOpen && index < maxIndex) {
+      const nextName = currentMap[index + 1].name;
+      dispatch(setCurrentStudentName(nextName));
+    } else if (e.key === "ArrowLeft" && reportCardOpen && index > 0) {
+      const previousName = currentMap[index + 1].name;
+      dispatch(setCurrentStudentName(previousName));
+    } else if (e.key === "Escape" && reportCardOpen) {
+      dispatch(setReportCardOpen(false));
+    }
+  }); */
 
   return (
-    <div className="report-card-container" id="report-card-container">
+    <div
+      className={`report-card-container ${reportCardOpen ? "" : "closed"}`}
+      id="report-card-container"
+    >
       <div className="report-card">
-        <div className="close-button" onClick={handleClick}>
+        <div className="close-button" onClick={handleClose}>
           ✕
         </div>
         <div className="chevron-right" onClick={() => handleChevron("+")}>
