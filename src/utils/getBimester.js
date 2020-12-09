@@ -9,4 +9,4 @@ const getBimester = (group) => {
   return Math.max(...bimesters) / 2;
 };
 
-module.exports = getBimester;
+export default getBimester;
