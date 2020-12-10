@@ -83,9 +83,9 @@ const ReportCard = () => {
     };
   });
 
-  /*   useEffect(() => {
-    setIndex(0);
-  }, [currentMap]); */
+  useEffect(() => {
+    setIndex(currentStudentIndex);
+  }, [currentStudentIndex]);
 
   return (
     <div
