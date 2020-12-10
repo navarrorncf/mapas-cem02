@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setReportCardOpen,
-  setCurrentStudentIndex,
+  // setCurrentStudentIndex,
 } from "../../redux/options/optionActions";
 
 import reportCards from "../../dev-data/reportCards.json";
@@ -24,9 +24,7 @@ const ReportCard = () => {
     (state) => state.options
   );
 
-  const [index, setIndex] = useState(
-    useSelector((state) => state.options.currentStudentIndex)
-  );
+  const [index, setIndex] = useState(0);
 
   const [open, setOpen] = useState(
     useSelector((state) => state.options.reportCardOpen)
@@ -44,7 +42,7 @@ const ReportCard = () => {
     2: ["ART", "ESP", "FIS", "GEO", "SOC", "PD2"],
   };
 
-  let student = currentMap[currentStudentIndex];
+  let student = currentMap[index];
   let failedSubjects = getFailedSubjects(student);
 
   const handleClose = (e) => {
@@ -52,12 +50,13 @@ const ReportCard = () => {
   };
 
   const handleChevron = (operation) => {
+    const i = index;
     if (operation === "+" && index < maxIndex) {
-      setIndex(index + 1);
-      dispatch(setCurrentStudentIndex(index));
+      setIndex(i + 1);
+      // dispatch(setCurrentStudentIndex(index));
     } else if (operation === "-" && index > 0) {
-      setIndex(index - 1);
-      dispatch(setCurrentStudentIndex(index));
+      setIndex(i - 1);
+      // dispatch(setCurrentStudentIndex(index));
     }
 
     failedSubjects = getFailedSubjects(student);
@@ -83,6 +82,10 @@ const ReportCard = () => {
       window.removeEventListener("keyup", handleKeyUp);
     };
   });
+
+  /*   useEffect(() => {
+    setIndex(0);
+  }, [currentMap]); */
 
   return (
     <div
