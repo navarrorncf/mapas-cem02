@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import {
   setReportCardOpen,
-  // setCurrentStudentIndex,
+  setCurrentStudentIndex,
 } from "../../redux/options/optionActions";
 
 import reportCards from "../../dev-data/reportCards.json";
@@ -46,6 +46,11 @@ const ReportCard = () => {
   let failedSubjects = getFailedSubjects(student);
 
   const handleClose = (e) => {
+    const targetID = e.target.id;
+    if (targetID !== "report-card-container" && targetID !== "close-button") {
+      return;
+    }
+    dispatch(setCurrentStudentIndex(0));
     dispatch(setReportCardOpen(false));
   };
 
@@ -63,8 +68,6 @@ const ReportCard = () => {
   };
 
   const handleKeyUp = (e) => {
-    console.log(e.key, index, maxIndex, open);
-
     if (e.key === "ArrowRight") {
       handleChevron("+");
     } else if (e.key === "ArrowLeft") {
@@ -92,9 +95,10 @@ const ReportCard = () => {
       className={`report-card-container ${reportCardOpen ? "" : "closed"}`}
       id="report-card-container"
       onKeyUp={handleKeyUp}
+      onClick={handleClose}
     >
       <div className="report-card">
-        <div className="close-button" onClick={handleClose}>
+        <div className="close-button" id="close-button" onClick={handleClose}>
           ✕
         </div>
         <div className="chevron-right" onClick={() => handleChevron("+")}>
