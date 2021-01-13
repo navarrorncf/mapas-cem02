@@ -38,8 +38,8 @@ const ReportCard = () => {
   const maxIndex = currentMap.length - 1;
 
   const subByBlock = {
-    1: ["BIO", "FIL", "HIS", "ING", "QUI"],
-    2: ["ART", "ESP", "FIS", "GEO", "SOC", "PD2"],
+    1: ["bio", "fil", "his", "ing", "qui"],
+    2: ["art", "esp", "fis", "geo", "soc", "pd2"],
   };
 
   let student = currentMap[index];
@@ -177,183 +177,183 @@ const ReportCard = () => {
                   </tr>
                 ))} */}
                 <tr>
-                  <td className="disciplinas"> {lengthen["EDF"]} </td>
+                  <td className="disciplinas"> {lengthen["edf"]} </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["EDF"][0] || "-"
+                      student.grades["edf"][0] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][0] || "-"}
+                    {student.grades["edf"][0] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["EDF"][1] || "-"
+                      student.grades["edf"][1] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][1] || "-"}
+                    {student.grades["edf"][1] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["EDF"][2] || "-"
+                      student.grades["edf"][2] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][2] || "-"}
+                    {student.grades["edf"][2] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["EDF"][3] || "-"
+                      student.grades["edf"][3] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][3] || "-"}
+                    {student.grades["edf"][3] || "-"}
                   </td>
-                  <td className="disciplinas">{lengthen["EDF"]}</td>
+                  <td className="disciplinas">{lengthen["edf"]}</td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["EDF"][4] || "-"
+                      student.grades["edf"][4] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][4] || "-"}
+                    {student.grades["edf"][4] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["EDF"][5] || "-"
+                      student.grades["edf"][5] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][5] || "-"}
+                    {student.grades["edf"][5] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["EDF"][6] || "-"
+                      student.grades["edf"][6] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][6] || "-"}
+                    {student.grades["edf"][6] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["EDF"][7] || "-"
+                      student.grades["edf"][7] || "-"
                     )}`}
                   >
-                    {student.grades["EDF"][7] || "-"}
+                    {student.grades["edf"][7] || "-"}
                   </td>
                 </tr>
                 <tr>
-                  <td className="disciplinas">{lengthen["LP"]}</td>
+                  <td className="disciplinas">{lengthen["lp"]}</td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["LP"][0] || "-"
+                      student.grades["lp"][0] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][0] || "-"}
+                    {student.grades["lp"][0] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["LP"][1] || "-"
+                      student.grades["lp"][1] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][1] || "-"}
+                    {student.grades["lp"][1] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["LP"][2] || "-"
+                      student.grades["lp"][2] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][2] || "-"}
+                    {student.grades["lp"][2] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["LP"][3] || "-"
+                      student.grades["lp"][3] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][3] || "-"}
+                    {student.grades["lp"][3] || "-"}
                   </td>
-                  <td className="disciplinas">{lengthen["LP"]}</td>
+                  <td className="disciplinas">{lengthen["lp"]}</td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["LP"][4] || "-"
+                      student.grades["lp"][4] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][4] || "-"}
+                    {student.grades["lp"][4] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["LP"][5] || "-"
+                      student.grades["lp"][5] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][5] || "-"}
+                    {student.grades["lp"][5] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["LP"][6] || "-"
+                      student.grades["lp"][6] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][6] || "-"}
+                    {student.grades["lp"][6] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["LP"][7] || "-"
+                      student.grades["lp"][7] || "-"
                     )}`}
                   >
-                    {student.grades["LP"][7] || "-"}
+                    {student.grades["lp"][7] || "-"}
                   </td>
                 </tr>
                 <tr>
-                  <td className="disciplinas">{lengthen["MAT"]}</td>
+                  <td className="disciplinas">{lengthen["mat"]}</td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["MAT"][0] || "-"
+                      student.grades["mat"][0] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][0] || "-"}
+                    {student.grades["mat"][0] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["MAT"][1] || "-"
+                      student.grades["mat"][1] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][1] || "-"}
+                    {student.grades["mat"][1] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["MAT"][2] || "-"
+                      student.grades["mat"][2] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][2] || "-"}
+                    {student.grades["mat"][2] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["MAT"][3] || "-"
+                      student.grades["mat"][3] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][3] || "-"}
+                    {student.grades["mat"][3] || "-"}
                   </td>
-                  <td className="disciplinas">{lengthen["MAT"]}</td>
+                  <td className="disciplinas">{lengthen["mat"]}</td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["MAT"][4] || "-"
+                      student.grades["mat"][4] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][4] || "-"}
+                    {student.grades["mat"][4] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["MAT"][5] || "-"
+                      student.grades["mat"][5] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][5] || "-"}
+                    {student.grades["mat"][5] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleCssClass(
-                      student.grades["MAT"][6] || "-"
+                      student.grades["mat"][6] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][6] || "-"}
+                    {student.grades["mat"][6] || "-"}
                   </td>
                   <td
                     className={`coluna ${simpleAttendanceClass(
-                      student.grades["MAT"][7] || "-"
+                      student.grades["mat"][7] || "-"
                     )}`}
                   >
-                    {student.grades["MAT"][7] || "-"}
+                    {student.grades["mat"][7] || "-"}
                   </td>
                 </tr>
                 <tr>
