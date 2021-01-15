@@ -3,7 +3,7 @@ const getFailedSubjects = (student) => {
   let count = 0;
 
   Object.keys(grades).forEach((subject) => {
-    if (!/PD/.test(subject)) {
+    if (!/pd/.test(subject)) {
       let bim = grades[subject].filter((el) => el !== "-").length / 2;
       let values = grades[subject].filter(
         (el, index) => el !== "-" && index % 2 === 0
