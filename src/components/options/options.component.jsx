@@ -1,10 +1,6 @@
 import React, { useState } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setGroup,
-  setGrade,
-  setCurrentStudentIndex,
-} from "../../redux/options/optionActions";
+import { setGroup, setGrade } from "../../redux/options/optionActions";
 
 import { allGrades, groupsByGrade } from "../../redux/options/initialState";
 
@@ -22,7 +18,6 @@ const Options = () => {
   const dispatch = useDispatch();
 
   const handleChangeGroup = (e) => {
-    dispatch(setCurrentStudentIndex(0));
     changeGroup(e.target.value);
     dispatch(setGroup(e.target.value));
   };
@@ -30,7 +25,6 @@ const Options = () => {
   const handleChangeGrade = (e) => {
     const currentGrade = e.target.value;
     changeGrade(currentGrade);
-    dispatch(setCurrentStudentIndex(0));
     dispatch(setGrade(currentGrade));
     const firstGroup = groupsByGrade[currentGrade][0];
     changeGroup(firstGroup);

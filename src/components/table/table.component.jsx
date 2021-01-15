@@ -11,7 +11,6 @@ import "./table.styles.scss";
 const Table = () => {
   const { group } = useSelector((state) => state.options);
 
-  // TODO
   const currentMap = reportCards.filter(
     (reportCard) => reportCard.group === group
   );

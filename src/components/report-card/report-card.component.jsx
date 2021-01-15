@@ -1,9 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import {
-  setReportCardOpen,
-  setCurrentStudentIndex,
-} from "../../redux/options/optionActions";
+import { setReportCardOpen } from "../../redux/options/optionActions";
 
 import reportCards from "../../dev-data/reportCards.json";
 import { lengthen } from "../../utils/abbreviations";
@@ -50,7 +47,7 @@ const ReportCard = () => {
     if (targetID !== "report-card-container" && targetID !== "close-button") {
       return;
     }
-    dispatch(setCurrentStudentIndex(0));
+    setIndex(0);
     dispatch(setReportCardOpen(false));
   };
 
@@ -58,10 +55,8 @@ const ReportCard = () => {
     const i = index;
     if (operation === "+" && index < maxIndex) {
       setIndex(i + 1);
-      // dispatch(setCurrentStudentIndex(index));
     } else if (operation === "-" && index > 0) {
       setIndex(i - 1);
-      // dispatch(setCurrentStudentIndex(index));
     }
 
     failedSubjects = getFailedSubjects(student);
