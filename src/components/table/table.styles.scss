@@ -80,3 +80,15 @@ table {
     display: block;
   }
 }
+
+@media print {
+  .table-container {
+    height: 100%;
+    font-size: 14px;
+    -webkit-print-color-adjust: exact;
+  }
+
+  .table--body {
+    height: unset;
+  }
+}
