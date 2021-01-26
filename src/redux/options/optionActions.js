@@ -19,3 +19,8 @@ export const setReportCardOpen = (open) => ({
   type: actionTypes.SET_REPORT_CARD_OPEN,
   payload: open,
 });
+
+export const setFilterMode = (mode) => ({
+  type: actionTypes.SET_FILTER_MODE,
+  payload: mode,
+});

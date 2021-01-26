@@ -3,6 +3,7 @@ const optionActionTypes = {
   SET_GRADE: "SET_GRADE",
   SET_CURRENT_STUDENT_INDEX: "SET_CURRENT_STUDENT_INDEX",
   SET_REPORT_CARD_OPEN: "SET_REPORT_CARD_OPEN",
+  SET_FILTER_MODE: "SET_FILTER_MODE",
 };
 
 export default optionActionTypes;

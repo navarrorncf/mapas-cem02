@@ -4,6 +4,7 @@ import {
   firstGroup,
   currentStudentIndex,
   reportCardOpen,
+  filterMode,
 } from "./initialState";
 
 const initialState = {
@@ -11,6 +12,7 @@ const initialState = {
   group: firstGroup,
   currentStudentIndex,
   reportCardOpen,
+  filterMode,
 };
 
 const optionsReducer = (state = initialState, { type, payload }) => {
@@ -34,6 +36,11 @@ const optionsReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         reportCardOpen: payload,
+      };
+    case actionTypes.SET_FILTER_MODE:
+      return {
+        ...state,
+        filterMode: payload,
       };
     default:
       return state;

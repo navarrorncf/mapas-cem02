@@ -12,6 +12,8 @@ const reportCardOpen = false;
 
 const currentStudentIndex = 0;
 
+const filterMode = "none";
+
 export {
   allGrades,
   groupsByGrade,
@@ -19,4 +21,5 @@ export {
   reportCards,
   currentStudentIndex,
   reportCardOpen,
+  filterMode,
 };
