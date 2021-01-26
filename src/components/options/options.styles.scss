@@ -11,11 +11,15 @@
 }
 
 .options {
-  max-width: 600px;
+  max-width: 750px;
   margin: 0 auto;
   display: flex;
   justify-content: space-around;
   font-weight: 400;
+
+  .option {
+    margin: 0 1rem;
+  }
 
   .option select {
     margin: 0 10px;
