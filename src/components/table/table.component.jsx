@@ -5,22 +5,25 @@ import TableRow from "../table-row/table-row.component";
 import reportCards from "../../dev-data/reportCards.json";
 
 import getBimester from "../../utils/getBimester";
+import filterMap from "../../utils/filterMap";
 
 import "./table.styles.scss";
 
 const Table = () => {
-  const { group } = useSelector((state) => state.options);
+  const { group, filterMode } = useSelector((state) => state.options);
 
   const currentMap = reportCards.filter(
     (reportCard) => reportCard.group === group
   );
 
-  const headers = Object.keys(currentMap[0].grades);
+  const filteredMap = filterMap(currentMap, filterMode);
+
+  const headers = Object.keys(filteredMap[0].grades);
   headers.sort();
   headers.unshift("NOME");
   headers.push("F");
 
-  const bimester = getBimester(currentMap);
+  const bimester = getBimester(filteredMap);
 
   return (
     <div className="table-container">
@@ -48,7 +51,7 @@ const Table = () => {
           </tr>
         </thead>
         <tbody className="table--body">
-          {currentMap.map((student) => (
+          {filteredMap.map((student) => (
             <TableRow
               student={student}
               headers={headers}

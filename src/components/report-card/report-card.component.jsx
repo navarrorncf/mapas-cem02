@@ -12,14 +12,19 @@ import getFailedSubjects from "../../utils/getFailedSubjects";
 import brasao from "../../assets/images/brasao-df.png";
 import logo from "../../assets/images/logo128.png";
 
+import filterMap from "../../utils/filterMap";
+
 import "./report-card.styles.scss";
 
 const ReportCard = () => {
   const dispatch = useDispatch();
 
-  const { group, reportCardOpen, currentStudentIndex } = useSelector(
-    (state) => state.options
-  );
+  const {
+    group,
+    reportCardOpen,
+    currentStudentIndex,
+    filterMode,
+  } = useSelector((state) => state.options);
 
   const [index, setIndex] = useState(0);
 
@@ -31,15 +36,17 @@ const ReportCard = () => {
     (reportCard) => reportCard.group === group
   );
 
-  const blocks = currentMap[0].block;
-  const maxIndex = currentMap.length - 1;
+  const filteredMap = filterMap(currentMap, filterMode);
+
+  const blocks = filteredMap[0].block;
+  const maxIndex = filteredMap.length - 1;
 
   const subByBlock = {
     1: ["bio", "fil", "his", "ing", "qui"],
     2: ["art", "esp", "fis", "geo", "soc", "pd2"],
   };
 
-  let student = currentMap[index];
+  let student = filteredMap[index];
   let failedSubjects = getFailedSubjects(student);
 
   const handleClose = (e) => {
