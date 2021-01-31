@@ -24,3 +24,18 @@ export const setFilterMode = (mode) => ({
   type: actionTypes.SET_FILTER_MODE,
   payload: mode,
 });
+
+export const setOngoingCases = (cases) => ({
+  type: actionTypes.SET_ONGOING_CASES,
+  payload: cases,
+});
+
+export const updateVeredict = (veredict) => ({
+  type: actionTypes.UPDATE_VEREDICT,
+  payload: veredict,
+});
+
+export const updatePassedSubjects = (subject) => ({
+  type: actionTypes.UPDATE_PASSED_SUBJECT,
+  payload: subject,
+});

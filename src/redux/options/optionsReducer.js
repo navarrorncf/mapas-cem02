@@ -5,7 +5,10 @@ import {
   currentStudentIndex,
   reportCardOpen,
   filterMode,
+  ongoingCases,
 } from "./initialState";
+
+import updatePassedSubjects from "./updatePassedSubjects";
 
 const initialState = {
   grade: allGrades[0],
@@ -13,6 +16,7 @@ const initialState = {
   currentStudentIndex,
   reportCardOpen,
   filterMode,
+  ongoingCases,
 };
 
 const optionsReducer = (state = initialState, { type, payload }) => {
@@ -41,6 +45,36 @@ const optionsReducer = (state = initialState, { type, payload }) => {
       return {
         ...state,
         filterMode: payload,
+      };
+    case actionTypes.SET_ONGOING_CASES:
+      return {
+        ...state,
+        ongoingCases: payload,
+      };
+    case actionTypes.UPDATE_VEREDICT:
+      let newVeredicts = [...state.ongoingCases].map((student) => {
+        let { code, veredict } = payload;
+        if (student.code === code) {
+          let newStudent = { ...student };
+
+          return {
+            ...newStudent,
+            veredict,
+          };
+        }
+        return student;
+      });
+
+      return {
+        ...state,
+        ongoingCases: newVeredicts,
+      };
+    case actionTypes.UPDATE_PASSED_SUBJECT:
+      let newOngoingCases = updatePassedSubjects(state.ongoingCases, payload);
+
+      return {
+        ...state,
+        ongoingCases: newOngoingCases,
       };
     default:
       return state;

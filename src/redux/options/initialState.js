@@ -14,6 +14,8 @@ const currentStudentIndex = 0;
 
 const filterMode = "none";
 
+const ongoingCases = [];
+
 export {
   allGrades,
   groupsByGrade,
@@ -22,4 +24,5 @@ export {
   currentStudentIndex,
   reportCardOpen,
   filterMode,
+  ongoingCases,
 };
