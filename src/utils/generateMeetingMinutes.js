@@ -1,3 +1,4 @@
+const getFailedSubjectNames = require("./getFailedSubjectNames");
 const date = new Date();
 const year = date.getFullYear();
 const day = date.getDate();
@@ -21,6 +22,7 @@ const abbrev = {
   art: "arte",
   bio: "biologia",
   edf: "educação física",
+  esp: "espanhol",
   fil: "filosofia",
   fis: "física",
   geo: "geografia",
@@ -42,7 +44,7 @@ baseText = baseText
   .replace("%%ANO%%", year);
 
 const closingText =
-  "Nada mais tendo a tratar, o conselho de classe final da presente turma foi encerrado e a presente ata foi gerada para posterior assinatura dos participantes. A gravação da desta reunião estará disponível para sanar quaisquer dúvidas referentes aos resultados aqui definidos.";
+  "Nada mais tendo a tratar, o conselho de classe final da presente turma foi encerrado e esta ata foi gerada para posterior assinatura dos participantes. Esta reunião foi gravada e a gravação estará disponível para sanar quaisquer dúvidas referentes aos resultados aqui definidos.";
 
 const generateMeetingMinutes = (hora, allStudentsArray, studentsToFix) => {
   let bodyText = "";
@@ -50,32 +52,37 @@ const generateMeetingMinutes = (hora, allStudentsArray, studentsToFix) => {
 
   allStudentsArray.forEach((student) => {
     let { name, code } = student;
-    let toFix = studentsToFix[code];
+    let suffix = student.sex === "F" ? "a" : "o";
+    let toFix = studentsToFix.find((student) => student.code === code);
 
     if (!toFix || toFix.veredict === "ap") {
-      bodyText += `${code} - ${name}: aprovado(a) (AP). `;
+      bodyText += `${code} - ${name}: aprovad${suffix} (AP). `;
     } else if (toFix.veredict === "apc") {
       let passed = toFix.passed;
-      let passedSubjects = toFix.failedSubjects
-        .filter((el) => passed && !passed.includes(el))
-        .map((sub) => abbrev[sub])
+      let failedSubjectNames = getFailedSubjectNames(student);
+      let passedSubjects = failedSubjectNames
+        .filter((el) => (passed && !passed.includes(el)) || !passed)
         .join(", ")
-        .replace(/,( [a-z]*)$/, " e$1")
-        .replace("  ", " ")
-        .replace(/, e/g, " e");
+        .replace(/, ([a-z]{3})$/, " e $1");
 
-      bodyText += `${code} - ${name}: aprovado(a) via conselho em ${passedSubjects} (AP**). `;
+      failedSubjectNames.forEach((sub) => {
+        passedSubjects = passedSubjects.replace(sub, abbrev[sub]);
+      });
+
+      bodyText += `${code} - ${name}: aprovad${suffix} via conselho em ${passedSubjects} (AP**). `;
     } else if (toFix.veredict === "rep") {
       let passed = toFix.passed;
-      let passedSubjects = toFix.failedSubjects
-        .filter((el) => passed && !passed.includes(el))
-        .map((sub) => abbrev[sub])
+      let failedSubjectNames = getFailedSubjectNames(student);
+      let passedSubjects = failedSubjectNames
+        .filter((el) => (passed && !passed.includes(el)) || !passed)
         .join(", ")
-        .replace(/,( [a-z]*)$/, " e$1")
-        .replace("  ", " ")
-        .replace(/, e /g, " e ");
+        .replace(/, ([a-z]{3})$/, " e $1");
 
-      bodyText += `${code} - ${name}: reprovado(a) em ${passedSubjects} (REP). `;
+      failedSubjectNames.forEach((sub) => {
+        passedSubjects = passedSubjects.replace(sub, abbrev[sub]);
+      });
+
+      bodyText += `${code} - ${name}: reprovad${suffix} em ${passedSubjects} (REP). `;
     } else {
       console.log("Caso não tratado!", code);
     }
