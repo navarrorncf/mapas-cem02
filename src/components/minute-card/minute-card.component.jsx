@@ -4,9 +4,14 @@ import "./minute-card.styles.scss";
 
 import getAttendance from "../../utils/getAttendance";
 
-const MinuteCard = ({ student, handleSetGroupState, handleVeredict }) => {
+const MinuteCard = ({
+  student,
+  handleSetGroupState,
+  handleVeredict,
+  failedSubjects,
+}) => {
   const attendance = getAttendance(student);
-  const { name, code, failedSubjects } = student;
+  const { name, code, veredict } = student;
 
   return (
     <div className={`minute-card`}>
@@ -16,7 +21,7 @@ const MinuteCard = ({ student, handleSetGroupState, handleVeredict }) => {
       <h4>Faltas: {attendance}</h4>
       <div
         className="veredict"
-        onChange={(e) => handleVeredict(code, e.target.value)}
+        // onChange={(e) => handleVeredict(code, e.target.value)}
       >
         <div className="form-group">
           <input
@@ -24,7 +29,8 @@ const MinuteCard = ({ student, handleSetGroupState, handleVeredict }) => {
             name={`veredict-${code}`}
             id={`veredict-${code}-rep`}
             value="rep"
-            defaultChecked
+            checked={veredict === "rep"}
+            onChange={() => handleVeredict(code, "rep")}
           />
           <label htmlFor={`veredict-${code}-rep`}>REP</label>
         </div>
@@ -34,6 +40,8 @@ const MinuteCard = ({ student, handleSetGroupState, handleVeredict }) => {
             name={`veredict-${code}`}
             id={`veredict-${code}-ap`}
             value="ap"
+            checked={veredict === "ap"}
+            onChange={() => handleVeredict(code, "ap")}
           />
           <label htmlFor={`veredict-${code}-ap`}>AP</label>
         </div>
@@ -43,6 +51,8 @@ const MinuteCard = ({ student, handleSetGroupState, handleVeredict }) => {
             name={`veredict-${code}`}
             id={`veredict-${code}-apc`}
             value="apc"
+            checked={veredict === "apc"}
+            onChange={() => handleVeredict(code, "apc")}
           />
           <label htmlFor={`veredict-${code}-apc`}>AP**</label>
         </div>

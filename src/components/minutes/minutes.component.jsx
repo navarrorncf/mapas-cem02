@@ -1,11 +1,18 @@
-import React, { useState } from "react";
-import { useSelector } from "react-redux";
+import React, { useState, useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  updatePassedSubjects,
+  updateVeredict,
+  setOngoingCases,
+} from "../../redux/options/optionActions";
 
 import "./minutes.styles.scss";
 
 import filterMap from "../../utils/filterMap";
 import generateMeetingMinutes from "../../utils/generateMeetingMinutes";
 import getFailedSubjectNames from "../../utils/getFailedSubjectNames";
+import getFailedSubjects from "../../utils/getFailedSubjects";
+import updatePassedSubjectsUtil from "../../redux/options/updatePassedSubjects";
 
 import MinuteCard from "../minute-card/minute-card.component";
 
@@ -18,57 +25,52 @@ const Minutes = () => {
     (reportCard) => reportCard.group === group
   );
 
-  const ongoing = filterMap(currentGroupData, "ongoing");
+  let [groupState, setGroupState] = useState(
+    useSelector((state) => state.options.ongoingCases)
+  );
 
-  let students = {};
-  let studentsArray = [];
-  ongoing.forEach((student) => {
-    let code = student.code;
-    let failedSubjects = getFailedSubjectNames(student);
-    let studentObject = {
-      veredict: "rep",
-      failedSubjects,
-      ...student,
-      passed: [],
-    };
-    students[code] = studentObject;
-    studentsArray.push(studentObject);
-  });
+  const dispatch = useDispatch();
 
-  let [groupState, setGroupState] = useState(students);
-
-  const handleSetGroupState = (code, subject, payload) => {
-    let state = { ...groupState };
-    let student = state[code];
-    if (!student.passed) {
-      student.passed = [];
-    }
-
-    if (payload === "ap" && !student.passed.includes(subject)) {
-      student.passed.push(subject);
-    } else if (payload === "rep" && student.passed.includes(subject)) {
-      let newArr = [...student.passed].filter((el) => el !== subject);
-      console.log(student.passed, newArr);
-      student.passed = newArr;
-    } else {
-      console.log("ué", subject, payload);
-    }
-
-    setGroupState({
-      [code]: student,
-      ...state,
+  useEffect(() => {
+    const ongoing = filterMap(currentGroupData, "ongoing").map((student) => {
+      let veredict = "rep";
+      if (getFailedSubjects(student) < 3) {
+        veredict = "apc";
+      }
+      return {
+        veredict,
+        ...student,
+      };
     });
+
+    setGroupState(ongoing);
+    dispatch(setOngoingCases(ongoing));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [group]);
+
+  const handleSetGroupState = (code, subject, status) => {
+    setGroupState(
+      updatePassedSubjectsUtil(groupState, {
+        code,
+        subject,
+        status,
+      })
+    );
+    dispatch(updatePassedSubjects({ code, subject, status }));
   };
 
   const handleVeredict = (code, payload) => {
-    const state = { ...groupState };
-    const update = state[code];
-    update.veredict = payload;
-
-    setGroupState({
-      [code]: update,
-      ...state,
+    const newGroupState = groupState.map((student) => {
+      if (student.code === code) {
+        return {
+          ...student,
+          veredict: payload,
+        };
+      }
+      return student;
     });
+    setGroupState(newGroupState);
+    dispatch(updateVeredict({ code, veredict: payload }));
   };
 
   const [hora, setHora] = useState("");
@@ -109,19 +111,19 @@ const Minutes = () => {
           </div>
           <button
             onClick={() => {
-              for (let student of Object.values(groupState)) {
+              groupState.forEach((student) => {
+                let failedSubjectsCount = getFailedSubjects(student);
                 if (
                   student.veredict === "rep" &&
-                  (student.failedSubjects.length < 3 ||
+                  (failedSubjectsCount < 3 ||
                     (student.passed &&
-                      student.failedSubjects.length - student.passed.length <
-                        3))
+                      failedSubjectsCount - student.passed.length < 3))
                 ) {
                   return alert(
                     "Erro: existe algum estudante reprovado por menos de 3 disciplinas?"
                   );
                 }
-              }
+              });
               return save(
                 `ATA FINAL - ${group}.txt`,
                 generateMeetingMinutes(
@@ -135,13 +137,14 @@ const Minutes = () => {
             Baixar Ata do Conselho
           </button>
         </div>
-        {studentsArray.map((student) => {
+        {groupState.map((student) => {
           return (
             <MinuteCard
               student={student}
               key={`minute-${student.code}`}
               handleSetGroupState={handleSetGroupState}
               handleVeredict={handleVeredict}
+              failedSubjects={getFailedSubjectNames(student)}
             />
           );
         })}
