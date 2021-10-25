@@ -92,3 +92,18 @@ table {
     height: unset;
   }
 }
+
+.no-students {
+  height: 40rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.2rem;
+
+  & span {
+    padding: 2rem 3rem;
+    background-color: #f003;
+    color: #900;
+    font-weight: 400;
+  }
+}

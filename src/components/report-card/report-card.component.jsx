@@ -19,12 +19,8 @@ import "./report-card.styles.scss";
 const ReportCard = () => {
   const dispatch = useDispatch();
 
-  const {
-    group,
-    reportCardOpen,
-    currentStudentIndex,
-    filterMode,
-  } = useSelector((state) => state.options);
+  const { group, reportCardOpen, currentStudentIndex, filterMode } =
+    useSelector((state) => state.options);
 
   const [index, setIndex] = useState(0);
 
@@ -38,16 +34,25 @@ const ReportCard = () => {
 
   const filteredMap = filterMap(currentMap, filterMode);
 
-  const blocks = filteredMap[0].block;
-  const maxIndex = filteredMap.length - 1;
+  let blocks, maxIndex;
+
+  if (filteredMap.length) {
+    blocks = filteredMap[0].block;
+    maxIndex = filteredMap.length - 1;
+  }
 
   const subByBlock = {
     1: ["bio", "fil", "his", "ing", "qui"],
     2: ["art", "esp", "fis", "geo", "soc", "pd2"],
   };
 
-  let student = filteredMap[index];
-  let failedSubjects = getFailedSubjects(student);
+  let student = filteredMap && filteredMap[index];
+
+  let failedSubjects;
+
+  if (student) {
+    failedSubjects = getFailedSubjects(student);
+  }
 
   const handleClose = (e) => {
     const targetID = e.target.id;
@@ -92,7 +97,7 @@ const ReportCard = () => {
     setIndex(currentStudentIndex);
   }, [currentStudentIndex]);
 
-  return (
+  return student ? (
     <div
       className={`report-card-container ${reportCardOpen ? "" : "closed"}`}
       id="report-card-container"
@@ -779,6 +784,8 @@ const ReportCard = () => {
         </div>
       </div>
     </div>
+  ) : (
+    <></>
   );
 };
 

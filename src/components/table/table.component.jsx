@@ -18,14 +18,17 @@ const Table = () => {
 
   const filteredMap = filterMap(currentMap, filterMode);
 
-  const headers = Object.keys(filteredMap[0].grades);
-  headers.sort();
-  headers.unshift("NOME");
-  headers.push("F");
+  let headers, bimester;
 
-  const bimester = getBimester(filteredMap);
+  if (filteredMap.length) {
+    headers = Object.keys(filteredMap[0].grades);
+    headers.sort();
+    headers.unshift("NOME");
+    headers.push("F");
+    bimester = getBimester(filteredMap);
+  }
 
-  return (
+  return filteredMap.length ? (
     <div className="table-container">
       <table className="table">
         <thead className="table--head">
@@ -83,6 +86,10 @@ const Table = () => {
           </tr>
         </tfoot>
       </table>
+    </div>
+  ) : (
+    <div className="no-students">
+      <span>Nenhum estudante atende a esses critérios.</span>
     </div>
   );
 };
