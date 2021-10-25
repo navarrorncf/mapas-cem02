@@ -36,4 +36,4 @@ const updatePassedSubjects = (ongoingCases, payload) => {
   return newOngoingCases;
 };
 
-module.exports = updatePassedSubjects;
+export default updatePassedSubjects;
