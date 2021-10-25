@@ -5,7 +5,7 @@ import store from "./redux/store";
 import Options from "./components/options/options.component";
 import Table from "./components/table/table.component";
 import ReportCard from "./components/report-card/report-card.component";
-import Minutes from "./components/minutes/minutes.component";
+// import Minutes from "./components/minutes/minutes.component";
 
 import "./App.css";
 
