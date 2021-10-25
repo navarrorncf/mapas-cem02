@@ -16,7 +16,9 @@ const App = () => {
         <Options />
         <ReportCard />
         <Table />
-        <Minutes />
+
+        {/* Only active in the end of the school year */}
+        {/* <Minutes /> */}
       </div>
     </Provider>
   );
