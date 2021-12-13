@@ -1,5 +1,24 @@
 import reportCards from "../../dev-data/reportCards.json";
-import studentSets from "../../dev-data/studentSets.json";
+
+const studentSets = reportCards
+  .map(({ group, schoolYear }) => ({ group, schoolYear }))
+  .reduce(
+    (acc, cur) => {
+      const currentSchoolYear = cur.schoolYear,
+        currentGradeGroups = acc[currentSchoolYear],
+        currentGroup = cur.group;
+
+      return currentGradeGroups.includes(currentGroup)
+        ? acc
+        : {
+            ...acc,
+            [currentSchoolYear]: [...currentGradeGroups, currentGroup].sort(),
+          };
+    },
+    { 1: [], 2: [], 3: [] }
+  );
+
+console.log(studentSets);
 
 const allGrades = Object.keys(studentSets);
 allGrades.sort();
